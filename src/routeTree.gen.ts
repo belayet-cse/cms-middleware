@@ -17,6 +17,7 @@ import { Route as AuthenticatedBulkRouteImport } from './routes/_authenticated/b
 import { Route as AuthenticatedCardsRouteImport } from './routes/_authenticated/cards'
 import { Route as AuthenticatedCustomersRouteImport } from './routes/_authenticated/customers'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedIntegrationRouteImport } from './routes/_authenticated/integration'
 import { Route as AuthenticatedLimitsRouteImport } from './routes/_authenticated/limits'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedSetupRouteImport } from './routes/_authenticated/setup'
@@ -62,6 +63,12 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedIntegrationRoute =
+  AuthenticatedIntegrationRouteImport.update({
+    id: '/integration',
+    path: '/integration',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedLimitsRoute = AuthenticatedLimitsRouteImport.update({
   id: '/limits',
   path: '/limits',
@@ -97,6 +104,7 @@ export interface FileRoutesByFullPath {
   '/cards': typeof AuthenticatedCardsRoute
   '/customers': typeof AuthenticatedCustomersRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/integration': typeof AuthenticatedIntegrationRoute
   '/limits': typeof AuthenticatedLimitsRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/setup': typeof AuthenticatedSetupRoute
@@ -111,6 +119,7 @@ export interface FileRoutesByTo {
   '/cards': typeof AuthenticatedCardsRoute
   '/customers': typeof AuthenticatedCustomersRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/integration': typeof AuthenticatedIntegrationRoute
   '/limits': typeof AuthenticatedLimitsRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/setup': typeof AuthenticatedSetupRoute
@@ -127,6 +136,7 @@ export interface FileRoutesById {
   '/_authenticated/cards': typeof AuthenticatedCardsRoute
   '/_authenticated/customers': typeof AuthenticatedCustomersRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/integration': typeof AuthenticatedIntegrationRoute
   '/_authenticated/limits': typeof AuthenticatedLimitsRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/setup': typeof AuthenticatedSetupRoute
@@ -143,6 +153,7 @@ export interface FileRouteTypes {
     | '/cards'
     | '/customers'
     | '/dashboard'
+    | '/integration'
     | '/limits'
     | '/onboarding'
     | '/setup'
@@ -157,6 +168,7 @@ export interface FileRouteTypes {
     | '/cards'
     | '/customers'
     | '/dashboard'
+    | '/integration'
     | '/limits'
     | '/onboarding'
     | '/setup'
@@ -172,6 +184,7 @@ export interface FileRouteTypes {
     | '/_authenticated/cards'
     | '/_authenticated/customers'
     | '/_authenticated/dashboard'
+    | '/_authenticated/integration'
     | '/_authenticated/limits'
     | '/_authenticated/onboarding'
     | '/_authenticated/setup'
@@ -243,6 +256,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/integration': {
+      id: '/_authenticated/integration'
+      path: '/integration'
+      fullPath: '/integration'
+      preLoaderRoute: typeof AuthenticatedIntegrationRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/limits': {
       id: '/_authenticated/limits'
       path: '/limits'
@@ -287,6 +307,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCardsRoute: typeof AuthenticatedCardsRoute
   AuthenticatedCustomersRoute: typeof AuthenticatedCustomersRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedIntegrationRoute: typeof AuthenticatedIntegrationRoute
   AuthenticatedLimitsRoute: typeof AuthenticatedLimitsRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedSetupRoute: typeof AuthenticatedSetupRoute
@@ -300,6 +321,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCardsRoute: AuthenticatedCardsRoute,
   AuthenticatedCustomersRoute: AuthenticatedCustomersRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedIntegrationRoute: AuthenticatedIntegrationRoute,
   AuthenticatedLimitsRoute: AuthenticatedLimitsRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedSetupRoute: AuthenticatedSetupRoute,
