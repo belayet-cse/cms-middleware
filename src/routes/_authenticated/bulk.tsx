@@ -3,11 +3,11 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/mock/db";
 import { PageHeader } from "@/components/app/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { bulkUploadRequests } from "@/lib/cms.functions";
+import { bulkUploadRequests } from "@/lib/mock/actions";
 import { formatDateTime } from "@/lib/cms-constants";
 
 export const Route = createFileRoute("/_authenticated/bulk")({

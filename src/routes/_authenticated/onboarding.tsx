@@ -4,7 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/mock/db";
 import { PageHeader } from "@/components/app/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,7 +23,7 @@ import {
   PAYMENT_INSTRUCTIONS,
   REQUEST_TYPES,
 } from "@/lib/cms-constants";
-import { createCardRequest, searchCbsCif, submitCardRequest, updateCardRequest } from "@/lib/cms.functions";
+import { createCardRequest, searchCbsCif, submitCardRequest, updateCardRequest } from "@/lib/mock/actions";
 
 export const Route = createFileRoute("/_authenticated/onboarding")({
   validateSearch: (s: Record<string, unknown>) => ({ draft: (s['draft'] as string) || "" }),

@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/mock/db";
 import { useAuth } from "@/hooks/useAuth";
 import { PageHeader } from "@/components/app/PageHeader";
 import { StatusBadge } from "@/components/app/StatusBadge";
@@ -16,7 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { changeCardStatusFn } from "@/lib/cms.functions";
+import { changeCardStatusFn } from "@/lib/mock/actions";
 import { CARD_TYPES, formatAmount, formatDateTime, labelOf } from "@/lib/cms-constants";
 
 export const Route = createFileRoute("/_authenticated/cards")({

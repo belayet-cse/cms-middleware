@@ -2,11 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/mock/db";
 import { PageHeader } from "@/components/app/PageHeader";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ROLES } from "@/lib/cms-constants";
-import { setUserRolesFn } from "@/lib/cms.functions";
+import { setUserRolesFn } from "@/lib/mock/actions";
 import type { AppRole } from "@/hooks/useAuth";
 
 export const Route = createFileRoute("/_authenticated/users")({

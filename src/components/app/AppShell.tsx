@@ -15,7 +15,7 @@ import {
   Activity,
   LogOut,
 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/mock/db";
 import { useAuth } from "@/hooks/useAuth";
 import { ROLES } from "@/lib/cms-constants";
 import { Button } from "@/components/ui/button";
