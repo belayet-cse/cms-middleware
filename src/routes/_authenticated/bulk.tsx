@@ -35,7 +35,7 @@ function parseCsv(text: string) {
 function BulkUpload() {
   const queryClient = useQueryClient();
   const [busy, setBusy] = useState(false);
-  const upload = useServerFn(bulkUploadRequests);
+  const upload = bulkUploadRequests;
 
   const { data: batches } = useQuery({
     queryKey: ["bulk-batches"],

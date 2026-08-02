@@ -108,10 +108,10 @@ function Onboarding() {
     { cif_number: string; full_name: string; mobile: string; national_id?: string | null }[]
   >([]);
 
-  const createFn = useServerFn(createCardRequest);
-  const updateFn = useServerFn(updateCardRequest);
-  const submitFn = useServerFn(submitCardRequest);
-  const searchFn = useServerFn(searchCbsCif);
+  const createFn = createCardRequest;
+  const updateFn = updateCardRequest;
+  const submitFn = submitCardRequest;
+  const searchFn = searchCbsCif;
 
   const { data: masters } = useQuery({
     queryKey: ["masters"],

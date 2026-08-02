@@ -35,7 +35,7 @@ function CardPortfolio() {
   const auth = useAuth();
   const queryClient = useQueryClient();
   const [search, setSearch] = useState("");
-  const changeStatus = useServerFn(changeCardStatusFn);
+  const changeStatus = changeCardStatusFn;
 
   const { data, isLoading } = useQuery({
     queryKey: ["cards"],

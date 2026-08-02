@@ -15,7 +15,7 @@ export const Route = createFileRoute("/_authenticated/users")({
 
 function UsersAndRoles() {
   const queryClient = useQueryClient();
-  const setRoles = useServerFn(setUserRolesFn);
+  const setRoles = setUserRolesFn;
 
   const { data, isLoading } = useQuery({
     queryKey: ["staff"],
