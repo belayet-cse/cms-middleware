@@ -131,7 +131,7 @@ function BulkUpload() {
                 <tr key={b.id}>
                   <td className="px-3 py-2.5">{b.file_name}</td>
                   <td className="px-3 py-2.5 tabular-nums">{b.total_rows}</td>
-                  <td className="px-3 py-2.5 tabular-nums text-emerald-600">{b.accepted_rows}</td>
+                  <td className="px-3 py-2.5 tabular-nums text-success">{b.accepted_rows}</td>
                   <td className="px-3 py-2.5 tabular-nums text-destructive">{b.rejected_rows}</td>
                   <td className="px-3 py-2.5 text-xs text-muted-foreground">
                     {formatDateTime(b.created_at)}
