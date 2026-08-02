@@ -46,7 +46,7 @@ export const Route = createFileRoute("/_authenticated/client")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: ClientOnboarding;
+  component: ClientOnboarding,
 });
 
 type Form = Record<string, string | boolean>;

@@ -9,6 +9,8 @@ import {
   CreditCard,
   Users2,
   UploadCloud,
+  SearchCheck,
+  UserPlus,
   Settings2,
   ShieldCheck,
   ScrollText,
@@ -34,6 +36,8 @@ const NAV: { group: string; items: NavItem[] }[] = [
     group: "Operations",
     items: [
       { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+      { to: "/dedupe", label: "Dedupe Search", icon: SearchCheck, show: (a) => a.canMake },
+      { to: "/client", label: "CIF & Client ID", icon: UserPlus, show: (a) => a.canMake },
       { to: "/onboarding", label: "New Booking", icon: FilePlus2, show: (a) => a.canMake },
       { to: "/requests", label: "Request Queue", icon: ListChecks },
       { to: "/limits", label: "Limit Control", icon: Gauge, show: (a) => a.canCheck },
