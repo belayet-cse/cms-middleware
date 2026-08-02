@@ -21,6 +21,7 @@ import { Route as AuthenticatedIntegrationRouteImport } from './routes/_authenti
 import { Route as AuthenticatedLimitsRouteImport } from './routes/_authenticated/limits'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedSetupRouteImport } from './routes/_authenticated/setup'
+import { Route as AuthenticatedUsersRouteImport } from './routes/_authenticated/users'
 import { Route as AuthenticatedRequestsIndexRouteImport } from './routes/_authenticated/requests.index'
 import { Route as AuthenticatedRequestsIdRouteImport } from './routes/_authenticated/requests.$id'
 
@@ -84,6 +85,11 @@ const AuthenticatedSetupRoute = AuthenticatedSetupRouteImport.update({
   path: '/setup',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedUsersRoute = AuthenticatedUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedRequestsIndexRoute =
   AuthenticatedRequestsIndexRouteImport.update({
     id: '/requests/',
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/limits': typeof AuthenticatedLimitsRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/setup': typeof AuthenticatedSetupRoute
+  '/users': typeof AuthenticatedUsersRoute
   '/requests/$id': typeof AuthenticatedRequestsIdRoute
   '/requests/': typeof AuthenticatedRequestsIndexRoute
 }
@@ -123,6 +130,7 @@ export interface FileRoutesByTo {
   '/limits': typeof AuthenticatedLimitsRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/setup': typeof AuthenticatedSetupRoute
+  '/users': typeof AuthenticatedUsersRoute
   '/requests/$id': typeof AuthenticatedRequestsIdRoute
   '/requests': typeof AuthenticatedRequestsIndexRoute
 }
@@ -140,6 +148,7 @@ export interface FileRoutesById {
   '/_authenticated/limits': typeof AuthenticatedLimitsRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/setup': typeof AuthenticatedSetupRoute
+  '/_authenticated/users': typeof AuthenticatedUsersRoute
   '/_authenticated/requests/$id': typeof AuthenticatedRequestsIdRoute
   '/_authenticated/requests/': typeof AuthenticatedRequestsIndexRoute
 }
@@ -157,6 +166,7 @@ export interface FileRouteTypes {
     | '/limits'
     | '/onboarding'
     | '/setup'
+    | '/users'
     | '/requests/$id'
     | '/requests/'
   fileRoutesByTo: FileRoutesByTo
@@ -172,6 +182,7 @@ export interface FileRouteTypes {
     | '/limits'
     | '/onboarding'
     | '/setup'
+    | '/users'
     | '/requests/$id'
     | '/requests'
   id:
@@ -188,6 +199,7 @@ export interface FileRouteTypes {
     | '/_authenticated/limits'
     | '/_authenticated/onboarding'
     | '/_authenticated/setup'
+    | '/_authenticated/users'
     | '/_authenticated/requests/$id'
     | '/_authenticated/requests/'
   fileRoutesById: FileRoutesById
@@ -284,6 +296,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSetupRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/users': {
+      id: '/_authenticated/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AuthenticatedUsersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/requests/': {
       id: '/_authenticated/requests/'
       path: '/requests'
@@ -311,6 +330,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedLimitsRoute: typeof AuthenticatedLimitsRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedSetupRoute: typeof AuthenticatedSetupRoute
+  AuthenticatedUsersRoute: typeof AuthenticatedUsersRoute
   AuthenticatedRequestsIdRoute: typeof AuthenticatedRequestsIdRoute
   AuthenticatedRequestsIndexRoute: typeof AuthenticatedRequestsIndexRoute
 }
@@ -325,6 +345,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedLimitsRoute: AuthenticatedLimitsRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedSetupRoute: AuthenticatedSetupRoute,
+  AuthenticatedUsersRoute: AuthenticatedUsersRoute,
   AuthenticatedRequestsIdRoute: AuthenticatedRequestsIdRoute,
   AuthenticatedRequestsIndexRoute: AuthenticatedRequestsIndexRoute,
 }
