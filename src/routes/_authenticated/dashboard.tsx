@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/mock/db";
 import { useAuth } from "@/hooks/useAuth";
 import { PageHeader } from "@/components/app/PageHeader";
 import { StatusBadge } from "@/components/app/StatusBadge";
@@ -67,7 +67,7 @@ function Dashboard() {
   return (
     <div>
       <PageHeader
-        title={`Welcome${profile?.full_name ? `, ${profile.full_name.split(" ")[0]}` : ""}`}
+        title={`Welcome${profile?.['full_name'] ? `, ${profile['full_name'].split(" ")[0]}` : ""}`}
         description="Live position of card bookings, approvals and downstream synchronisation."
         actions={
           canMake ? (

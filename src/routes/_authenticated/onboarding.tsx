@@ -1,10 +1,8 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { z } from "zod";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/mock/db";
 import { PageHeader } from "@/components/app/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,44 +21,11 @@ import {
   PAYMENT_INSTRUCTIONS,
   REQUEST_TYPES,
 } from "@/lib/cms-constants";
-import { createCardRequest, searchCbsCif, submitCardRequest, updateCardRequest } from "@/lib/cms.functions";
+import { createCardRequest, searchCbsCif, submitCardRequest, updateCardRequest } from "@/lib/mock/actions";
 
 export const Route = createFileRoute("/_authenticated/onboarding")({
   validateSearch: (s: Record<string, unknown>) => ({ draft: (s['draft'] as string) || "" }),
   component: Onboarding,
-});
-
-const schema = z.object({
-  applicant_name: z.string().trim().min(3, "Applicant name is required").max(100),
-  embossing_name: z.string().trim().max(26).optional(),
-  mobile: z.string().trim().regex(/^[0-9+\-\s]{6,20}$/, "Valid mobile number required"),
-  email: z.string().trim().email("Valid email required").max(255).optional().or(z.literal("")),
-  national_id: z.string().trim().max(30).optional(),
-  passport_no: z.string().trim().max(30).optional(),
-  tin: z.string().trim().max(30).optional(),
-  date_of_birth: z.string().optional(),
-  father_name: z.string().trim().max(100).optional(),
-  mother_name: z.string().trim().max(100).optional(),
-  gender: z.string().optional(),
-  company_name: z.string().trim().max(120).optional(),
-  address_line1: z.string().trim().max(150).optional(),
-  address_line2: z.string().trim().max(150).optional(),
-  city: z.string().trim().max(60).optional(),
-  postal_code: z.string().trim().max(20).optional(),
-  request_type: z.string(),
-  card_type: z.string(),
-  product_id: z.string().uuid("Select a card product"),
-  fee_profile_id: z.string().uuid("Select a fee profile"),
-  requested_limit: z.coerce.number().min(0, "Requested limit is required").max(100_000_000),
-  payment_instruction: z.string(),
-  fc_category: z.string(),
-  fc_account_no: z.string().trim().max(30).optional(),
-  use_existing_cif: z.boolean(),
-  existing_cif: z.string().trim().max(30).optional(),
-  email_tagged: z.boolean(),
-  sms_tagged: z.boolean(),
-  credit_shield: z.boolean(),
-  credit_shield_rate: z.coerce.number().min(0).max(100).optional(),
 });
 
 const EMPTY = {
@@ -108,10 +73,10 @@ function Onboarding() {
     { cif_number: string; full_name: string; mobile: string; national_id?: string | null }[]
   >([]);
 
-  const createFn = useServerFn(createCardRequest);
-  const updateFn = useServerFn(updateCardRequest);
-  const submitFn = useServerFn(submitCardRequest);
-  const searchFn = useServerFn(searchCbsCif);
+  const createFn = createCardRequest;
+  const updateFn = updateCardRequest;
+  const submitFn = submitCardRequest;
+  const searchFn = searchCbsCif;
 
   const { data: masters } = useQuery({
     queryKey: ["masters"],
@@ -162,10 +127,6 @@ function Onboarding() {
   const selectedProduct = products.find((p) => p.id === form.product_id);
 
   async function handleCifSearch() {
-    if (cifQuery.trim().length < 3) {
-      toast.error("Enter at least 3 characters to search");
-      return;
-    }
     try {
       const res = (await searchFn({ data: { query: cifQuery.trim() } })) as never as {
         results: typeof cifResults;
@@ -179,16 +140,10 @@ function Onboarding() {
   }
 
   function buildPayload() {
-    const parsed = schema.safeParse({
-      ...form,
-      requested_limit: form.requested_limit === "" ? undefined : form.requested_limit,
-      credit_shield_rate: form.credit_shield_rate === "" ? undefined : form.credit_shield_rate,
-    });
-    if (!parsed.success) {
-      toast.error(parsed.error.issues[0]?.message ?? "Please check the form");
-      return null;
-    }
-    const payload: Record<string, unknown> = { ...parsed.data };
+    // Prototype: no validation — the form is captured as-is.
+    const payload: Record<string, unknown> = { ...form };
+    payload['requested_limit'] = Number(form.requested_limit || 0);
+    payload['credit_shield_rate'] = form.credit_shield_rate === "" ? null : Number(form.credit_shield_rate);
     for (const key of Object.keys(payload)) {
       if (payload[key] === "") payload[key] = null;
     }
