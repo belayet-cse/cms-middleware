@@ -1,24 +1,119 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "CMS Middleware — CBS to Tranzware Card Management" },
+      {
+        name: "description",
+        content:
+          "Middleware for customer onboarding and end-to-end card booking between Core Banking and the Tranzware Card Management System, with maker-checker control and full audit trail.",
+      },
+      { property: "og:title", content: "CMS Middleware — CBS to Tranzware Card Management" },
+      {
+        property: "og:description",
+        content:
+          "Single-point data entry, automated card number generation, dual-control limit approval and real-time CBS/CMS synchronisation.",
+      },
+    ],
+  }),
+  component: Landing,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+const CAPABILITIES = [
+  {
+    title: "Customer onboarding",
+    body: "Search or create a CIF once. The middleware creates the CIF in Core Banking and the Client ID in the Card Management System, then keeps both in step.",
+  },
+  {
+    title: "End-to-end card booking",
+    body: "Product type, fee profile, card number generation, email and SMS tagging, payment instruction and credit shield in a single case file.",
+  },
+  {
+    title: "Maker-checker control",
+    body: "Maker submits, Checker approves, Checker-1 sets the limit and Checker-2 authorises it — with segregation of duty enforced server-side.",
+  },
+  {
+    title: "Governance & reporting",
+    body: "Every sync, data change and approval is recorded in an immutable audit trail with an integration monitor for failures and exceptions.",
+  },
+];
+
+function Landing() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <header className="bg-sidebar text-sidebar-foreground">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.2em] text-sidebar-foreground/60">
+              Mutual Trust Bank PLC
+            </p>
+            <p className="text-sm font-bold text-sidebar-accent-foreground">CMS Middleware</p>
+          </div>
+          <Link to="/auth">
+            <Button size="sm">Staff sign in</Button>
+          </Link>
+        </div>
+        <div className="mx-auto max-w-6xl px-6 pb-16 pt-10">
+          <p className="field-label text-sidebar-primary">Card Operations Platform</p>
+          <h1 className="mt-3 max-w-3xl text-4xl font-bold leading-[1.1] text-sidebar-accent-foreground sm:text-5xl">
+            One workflow from customer onboarding to an issued card number.
+          </h1>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-sidebar-foreground/80">
+            The middleware bridges the Core Banking System and the Tranzware Card Management System —
+            removing duplicate entry, enforcing maker-checker control and synchronising customer and
+            card data in real time for accurate CIB reporting.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link to="/auth">
+              <Button size="lg">Open the middleware</Button>
+            </Link>
+            <Link to="/auth">
+              <Button size="lg" variant="secondary">
+                Register staff account
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      <section className="mx-auto max-w-6xl px-6 py-14">
+        <h2 className="text-lg font-semibold">What the middleware handles</h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          {CAPABILITIES.map((c) => (
+            <article key={c.title} className="rounded-lg border bg-card p-5">
+              <h3 className="text-sm font-semibold">{c.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.body}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-10 rounded-lg border bg-card p-6">
+          <h2 className="text-sm font-semibold">Approval chain</h2>
+          <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
+            {[
+              "Maker captures CIF + booking",
+              "Checker validates & approves",
+              "CIF, Client ID & card number generated",
+              "Checker-1 sets limit",
+              "Checker-2 authorises",
+              "Synced to CBS & CMS",
+            ].map((step, i) => (
+              <span key={step} className="flex items-center gap-2">
+                <span className="rounded-md border bg-secondary px-2.5 py-1.5 font-medium text-secondary-foreground">
+                  {i + 1}. {step}
+                </span>
+                {i < 5 && <span className="text-muted-foreground">→</span>}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-t px-6 py-6 text-center text-xs text-muted-foreground">
+        Card Operations · Internal use only
+      </footer>
     </div>
   );
 }
