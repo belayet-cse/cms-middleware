@@ -727,6 +727,7 @@ export type Database = {
         Returns: boolean
       }
       is_admin: { Args: { _user_id: string }; Returns: boolean }
+      next_card_request_reference: { Args: never; Returns: string }
     }
     Enums: {
       app_role: "admin" | "maker" | "checker1" | "checker2" | "auditor"
