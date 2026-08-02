@@ -20,6 +20,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { ROLES } from "@/lib/cms-constants";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import mtbLogo from "@/assets/mtb-logo.png.asset.json";
 
 type NavItem = {
   to: string;
@@ -76,6 +77,9 @@ export function AppShell({ children }: { children: ReactNode }) {
     <div className="flex min-h-screen bg-background">
       <aside className="hidden w-64 shrink-0 flex-col bg-sidebar text-sidebar-foreground lg:flex">
         <div className="border-b border-sidebar-border px-5 py-4">
+          <div className="mb-3 inline-flex rounded-md bg-white px-2.5 py-1.5">
+            <img src={mtbLogo.url} alt="Mutual Trust Bank PLC logo" className="h-7 w-auto" />
+          </div>
           <p className="text-sm font-bold tracking-tight text-sidebar-accent-foreground">
             CMS Middleware
           </p>
