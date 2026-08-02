@@ -121,6 +121,7 @@ function Landing() {
         </div>
       </section>
 
+      <div className="brand-rule" />
       <footer className="border-t px-6 py-6 text-center text-xs text-muted-foreground">
         Card Operations · Internal use only
       </footer>
