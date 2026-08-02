@@ -163,7 +163,7 @@ function Dashboard() {
                   <div className="flex items-center justify-between gap-2">
                     <p className="text-xs font-semibold uppercase tracking-wide">{log.system}</p>
                     <span
-                      className={`text-[11px] font-medium ${log.success ? "text-emerald-600" : "text-destructive"}`}
+                      className={`text-[11px] font-medium ${log.success ? "text-success" : "text-destructive"}`}
                     >
                       {log.success ? "Success" : "Failed"}
                     </span>
