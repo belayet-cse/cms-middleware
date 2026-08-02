@@ -191,3 +191,38 @@
   font-variant-numeric: tabular-nums;
   font-size: 0.8125rem;
 }
+
+@utility mono {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+@utility status-neutral {
+  border-color: var(--border);
+  background-color: var(--muted);
+  color: var(--muted-foreground);
+}
+
+@utility status-info {
+  border-color: color-mix(in oklab, var(--primary) 35%, transparent);
+  background-color: color-mix(in oklab, var(--primary) 10%, transparent);
+  color: var(--primary);
+}
+
+@utility status-warning {
+  border-color: oklch(0.75 0.15 75 / 45%);
+  background-color: oklch(0.75 0.15 75 / 12%);
+  color: oklch(0.5 0.13 70);
+}
+
+@utility status-success {
+  border-color: oklch(0.65 0.13 160 / 45%);
+  background-color: oklch(0.65 0.13 160 / 12%);
+  color: oklch(0.48 0.12 160);
+}
+
+@utility status-danger {
+  border-color: color-mix(in oklab, var(--destructive) 40%, transparent);
+  background-color: color-mix(in oklab, var(--destructive) 10%, transparent);
+  color: var(--destructive);
+}
