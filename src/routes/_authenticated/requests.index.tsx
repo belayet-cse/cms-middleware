@@ -60,7 +60,7 @@ function RequestQueue() {
         title="Request queue"
         description="Every card booking case with its current maker-checker stage."
         actions={
-          <Link to="/onboarding">
+          <Link to="/onboarding" search={{ draft: "" }}>
             <Button>New booking</Button>
           </Link>
         }

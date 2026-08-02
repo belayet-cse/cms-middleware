@@ -76,6 +76,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen bg-background">
       <aside className="hidden w-64 shrink-0 flex-col bg-sidebar text-sidebar-foreground lg:flex">
+        <div className="brand-rule" />
         <div className="border-b border-sidebar-border px-5 py-4">
           <div className="mb-3 inline-flex rounded-md bg-white px-2.5 py-1.5">
             <img src={mtbLogo.url} alt="Mutual Trust Bank PLC logo" className="h-7 w-auto" />

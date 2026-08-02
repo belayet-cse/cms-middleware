@@ -71,7 +71,7 @@ function Dashboard() {
         description="Live position of card bookings, approvals and downstream synchronisation."
         actions={
           canMake ? (
-            <Link to="/onboarding">
+            <Link to="/onboarding" search={{ draft: "" }}>
               <Button>New card booking</Button>
             </Link>
           ) : null
