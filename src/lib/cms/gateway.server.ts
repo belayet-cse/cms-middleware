@@ -15,7 +15,7 @@ type CallOptions = {
   operation: string;
   path: string;
   payload: Record<string, unknown>;
-  requestId?: string | null;
+  requestId?: string | null | undefined;
   simulate: () => Record<string, unknown>;
 };
 
