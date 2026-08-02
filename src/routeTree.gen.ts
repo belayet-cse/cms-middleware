@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAuditRouteImport } from './routes/_authenticated/audit'
 import { Route as AuthenticatedBulkRouteImport } from './routes/_authenticated/bulk'
 import { Route as AuthenticatedCardsRouteImport } from './routes/_authenticated/cards'
+import { Route as AuthenticatedClientRouteImport } from './routes/_authenticated/client'
 import { Route as AuthenticatedCustomersRouteImport } from './routes/_authenticated/customers'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedDedupeRouteImport } from './routes/_authenticated/dedupe'
@@ -53,6 +54,11 @@ const AuthenticatedBulkRoute = AuthenticatedBulkRouteImport.update({
 const AuthenticatedCardsRoute = AuthenticatedCardsRouteImport.update({
   id: '/cards',
   path: '/cards',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedClientRoute = AuthenticatedClientRouteImport.update({
+  id: '/client',
+  path: '/client',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedCustomersRoute = AuthenticatedCustomersRouteImport.update({
@@ -114,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/audit': typeof AuthenticatedAuditRoute
   '/bulk': typeof AuthenticatedBulkRoute
   '/cards': typeof AuthenticatedCardsRoute
+  '/client': typeof AuthenticatedClientRoute
   '/customers': typeof AuthenticatedCustomersRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/dedupe': typeof AuthenticatedDedupeRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/audit': typeof AuthenticatedAuditRoute
   '/bulk': typeof AuthenticatedBulkRoute
   '/cards': typeof AuthenticatedCardsRoute
+  '/client': typeof AuthenticatedClientRoute
   '/customers': typeof AuthenticatedCustomersRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/dedupe': typeof AuthenticatedDedupeRoute
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/_authenticated/audit': typeof AuthenticatedAuditRoute
   '/_authenticated/bulk': typeof AuthenticatedBulkRoute
   '/_authenticated/cards': typeof AuthenticatedCardsRoute
+  '/_authenticated/client': typeof AuthenticatedClientRoute
   '/_authenticated/customers': typeof AuthenticatedCustomersRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/dedupe': typeof AuthenticatedDedupeRoute
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
     | '/audit'
     | '/bulk'
     | '/cards'
+    | '/client'
     | '/customers'
     | '/dashboard'
     | '/dedupe'
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
     | '/audit'
     | '/bulk'
     | '/cards'
+    | '/client'
     | '/customers'
     | '/dashboard'
     | '/dedupe'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/_authenticated/audit'
     | '/_authenticated/bulk'
     | '/_authenticated/cards'
+    | '/_authenticated/client'
     | '/_authenticated/customers'
     | '/_authenticated/dashboard'
     | '/_authenticated/dedupe'
@@ -264,6 +276,13 @@ declare module '@tanstack/react-router' {
       path: '/cards'
       fullPath: '/cards'
       preLoaderRoute: typeof AuthenticatedCardsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/client': {
+      id: '/_authenticated/client'
+      path: '/client'
+      fullPath: '/client'
+      preLoaderRoute: typeof AuthenticatedClientRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/customers': {
@@ -343,6 +362,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAuditRoute: typeof AuthenticatedAuditRoute
   AuthenticatedBulkRoute: typeof AuthenticatedBulkRoute
   AuthenticatedCardsRoute: typeof AuthenticatedCardsRoute
+  AuthenticatedClientRoute: typeof AuthenticatedClientRoute
   AuthenticatedCustomersRoute: typeof AuthenticatedCustomersRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDedupeRoute: typeof AuthenticatedDedupeRoute
@@ -359,6 +379,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAuditRoute: AuthenticatedAuditRoute,
   AuthenticatedBulkRoute: AuthenticatedBulkRoute,
   AuthenticatedCardsRoute: AuthenticatedCardsRoute,
+  AuthenticatedClientRoute: AuthenticatedClientRoute,
   AuthenticatedCustomersRoute: AuthenticatedCustomersRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDedupeRoute: AuthenticatedDedupeRoute,
@@ -382,3 +403,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
