@@ -226,15 +226,15 @@
 }
 
 @utility status-warning {
-  border-color: oklch(0.75 0.15 75 / 45%);
-  background-color: oklch(0.75 0.15 75 / 12%);
-  color: oklch(0.5 0.13 70);
+  border-color: color-mix(in oklab, var(--warning) 45%, transparent);
+  background-color: color-mix(in oklab, var(--warning) 12%, transparent);
+  color: color-mix(in oklab, var(--warning) 85%, var(--foreground));
 }
 
 @utility status-success {
-  border-color: oklch(0.65 0.13 160 / 45%);
-  background-color: oklch(0.65 0.13 160 / 12%);
-  color: oklch(0.48 0.12 160);
+  border-color: color-mix(in oklab, var(--success) 45%, transparent);
+  background-color: color-mix(in oklab, var(--success) 12%, transparent);
+  color: color-mix(in oklab, var(--success) 85%, var(--foreground));
 }
 
 @utility status-danger {
