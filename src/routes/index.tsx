@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import mtbLogo from "@/assets/mtb-logo.png.asset.json";
+import mtbSwoosh from "@/assets/mtb-swoosh.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,18 +47,26 @@ function Landing() {
     <div className="min-h-screen bg-background">
       <header className="bg-sidebar text-sidebar-foreground">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.2em] text-sidebar-foreground/60">
-              Mutual Trust Bank PLC
-            </p>
-            <p className="text-sm font-bold text-sidebar-accent-foreground">CMS Middleware</p>
+          <div className="flex items-center gap-3">
+            <span className="inline-flex rounded-md bg-white px-2.5 py-1.5">
+              <img src={mtbLogo.url} alt="Mutual Trust Bank PLC logo" className="h-7 w-auto" />
+            </span>
+            <span className="hidden text-sm font-bold text-sidebar-accent-foreground sm:inline">
+              CMS Middleware
+            </span>
           </div>
           <Link to="/auth">
             <Button size="sm">Staff sign in</Button>
           </Link>
         </div>
-        <div className="mx-auto max-w-6xl px-6 pb-16 pt-10">
-          <p className="field-label text-sidebar-primary">Card Operations Platform</p>
+        <div className="relative mx-auto max-w-6xl overflow-hidden px-6 pb-16 pt-10">
+          <img
+            src={mtbSwoosh.url}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-32 -top-6 w-[40rem] opacity-15"
+          />
+          <p className="field-label relative text-sidebar-primary">Card Operations Platform</p>
           <h1 className="mt-3 max-w-3xl text-4xl font-bold leading-[1.1] text-sidebar-accent-foreground sm:text-5xl">
             One workflow from customer onboarding to an issued card number.
           </h1>

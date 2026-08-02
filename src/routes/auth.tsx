@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import mtbLogo from "@/assets/mtb-logo.png.asset.json";
+import mtbSwoosh from "@/assets/mtb-swoosh.png.asset.json";
 
 export const Route = createFileRoute("/auth")({
   ssr: false,
@@ -84,11 +86,17 @@ function AuthPage() {
 
   return (
     <div className="grid min-h-screen lg:grid-cols-[1.1fr_1fr]">
-      <div className="hidden flex-col justify-between bg-sidebar px-10 py-12 text-sidebar-foreground lg:flex">
-        <div>
-          <p className="text-[11px] uppercase tracking-[0.2em] text-sidebar-foreground/60">
-            Mutual Trust Bank PLC
-          </p>
+      <div className="relative hidden flex-col justify-between overflow-hidden bg-sidebar px-10 py-12 text-sidebar-foreground lg:flex">
+        <img
+          src={mtbSwoosh.url}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-24 bottom-8 w-[36rem] opacity-15"
+        />
+        <div className="relative">
+          <div className="inline-flex rounded-md bg-white px-3 py-2">
+            <img src={mtbLogo.url} alt="Mutual Trust Bank PLC logo" className="h-8 w-auto" />
+          </div>
           <h1 className="mt-3 text-3xl font-bold leading-tight text-sidebar-accent-foreground">
             CBS ↔ Tranzware CMS
             <br />
@@ -99,7 +107,7 @@ function AuthPage() {
             generation and dual-control approvals — with a complete audit trail.
           </p>
         </div>
-        <ul className="space-y-3 text-sm text-sidebar-foreground/80">
+        <ul className="relative space-y-3 text-sm text-sidebar-foreground/80">
           {[
             "Maker → Checker → Checker-1 → Checker-2 workflow",
             "Real-time CIF and Client ID synchronisation",
