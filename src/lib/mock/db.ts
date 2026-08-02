@@ -56,8 +56,9 @@ function withRelations(table: string, row: Row): Row {
 
 type Filter = (row: Row) => boolean;
 
-type ListResult = { data: Row[]; error: { message: string } | null };
-type SingleResult = { data: Row | null; error: { message: string } | null };
+// Prototype rows are untyped so screens can read any mock column freely.
+type ListResult = { data: any[]; error: { message: string } | null };
+type SingleResult = { data: any; error: { message: string } | null };
 
 class MockQuery implements PromiseLike<ListResult> {
   private filters: Filter[] = [];
