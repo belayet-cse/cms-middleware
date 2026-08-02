@@ -116,7 +116,7 @@ export async function updateCardRequest({ data }: { data: { id: string; payload:
   return { id: data.id };
 }
 
-export async function submitCardRequest({ data }: { data: { id: string; remarks?: string } }) {
+export async function submitCardRequest({ data }: { data: { id: string; remarks?: string | undefined } }) {
   const row = bump("card_requests", data.id, {
     status: "pending_checker",
     submitted_at: nowIso(),
@@ -136,7 +136,7 @@ export async function submitCardRequest({ data }: { data: { id: string; remarks?
 export async function decideCardRequest({
   data,
 }: {
-  data: { id: string; decision: "approved" | "returned" | "rejected"; remarks?: string };
+  data: { id: string; decision: "approved" | "returned" | "rejected"; remarks?: string | undefined };
 }) {
   const request = tableRows("card_requests").find((r) => r['id'] === data.id);
   const from = request?.['status'] as string | undefined;
@@ -188,7 +188,7 @@ export async function decideCardRequest({
 export async function setRequestLimit({
   data,
 }: {
-  data: { id: string; approvedLimit: number; cashLimitPercent: number; remarks?: string };
+  data: { id: string; approvedLimit: number; cashLimitPercent: number; remarks?: string | undefined };
 }) {
   const row = bump("card_requests", data.id, {
     status: "limit_pending_checker2",
@@ -211,7 +211,7 @@ export async function setRequestLimit({
   return { id: data.id, status: "limit_pending_checker2" };
 }
 
-export async function approveRequestLimit({ data }: { data: { id: string; remarks?: string } }) {
+export async function approveRequestLimit({ data }: { data: { id: string; remarks?: string | undefined } }) {
   const request = tableRows("card_requests").find((r) => r['id'] === data.id);
   const product = tableRows("card_products").find((p) => p['id'] === request?.['product_id']);
   const cardNumber = luhnCardNumber(String(product?.['bin'] ?? "446789"));
@@ -266,7 +266,7 @@ export async function approveRequestLimit({ data }: { data: { id: string; remark
 export async function changeCardStatusFn({
   data,
 }: {
-  data: { cardId: string; status: string; remarks?: string };
+  data: { cardId: string; status: string; remarks?: string | undefined };
 }) {
   const row = bump("cards", data.cardId, { status: data.status });
   logIntegration("CMS", "card_status", null, { card: row?.['masked_number'], status: data.status });

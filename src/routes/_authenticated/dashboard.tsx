@@ -67,7 +67,7 @@ function Dashboard() {
   return (
     <div>
       <PageHeader
-        title={`Welcome${profile?.full_name ? `, ${profile.full_name.split(" ")[0]}` : ""}`}
+        title={`Welcome${profile?.['full_name'] ? `, ${profile['full_name'].split(" ")[0]}` : ""}`}
         description="Live position of card bookings, approvals and downstream synchronisation."
         actions={
           canMake ? (

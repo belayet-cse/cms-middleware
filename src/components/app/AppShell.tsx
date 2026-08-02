@@ -129,7 +129,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <header className="flex items-center justify-between gap-4 border-b bg-card px-5 py-3">
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold">
-              {auth.profile?.full_name || auth.user?.email}
+              {auth.profile?.['full_name'] || auth.user?.email}
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-1.5">
               {roleLabels.length ? (

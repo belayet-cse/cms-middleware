@@ -56,7 +56,10 @@ function withRelations(table: string, row: Row): Row {
 
 type Filter = (row: Row) => boolean;
 
-class MockQuery implements PromiseLike<{ data: any; error: null }> {
+type ListResult = { data: Row[]; error: { message: string } | null };
+type SingleResult = { data: Row | null; error: { message: string } | null };
+
+class MockQuery implements PromiseLike<ListResult> {
   private filters: Filter[] = [];
   private sorts: { column: string; asc: boolean }[] = [];
   private take: number | null = null;
@@ -138,13 +141,13 @@ class MockQuery implements PromiseLike<{ data: any; error: null }> {
     this.take = to - from + 1;
     return this;
   }
-  maybeSingle() {
+  maybeSingle(): PromiseLike<SingleResult> {
     this.one = true;
-    return this;
+    return this as unknown as PromiseLike<SingleResult>;
   }
-  single() {
+  single(): PromiseLike<SingleResult> {
     this.one = true;
-    return this;
+    return this as unknown as PromiseLike<SingleResult>;
   }
 
   private run() {
@@ -201,11 +204,11 @@ class MockQuery implements PromiseLike<{ data: any; error: null }> {
     return this.one ? result[0] ?? null : result;
   }
 
-  then<TResult1 = { data: any; error: null }, TResult2 = never>(
-    onfulfilled?: ((value: { data: any; error: null }) => TResult1 | PromiseLike<TResult1>) | null,
+  then<TResult1 = ListResult, TResult2 = never>(
+    onfulfilled?: ((value: ListResult) => TResult1 | PromiseLike<TResult1>) | null,
     onrejected?: ((reason: unknown) => TResult2 | PromiseLike<TResult2>) | null,
   ): PromiseLike<TResult1 | TResult2> {
-    return Promise.resolve({ data: this.run(), error: null }).then(onfulfilled, onrejected);
+    return Promise.resolve({ data: this.run(), error: null } as ListResult).then(onfulfilled, onrejected);
   }
 }
 
@@ -225,11 +228,17 @@ const MOCK_SESSION = {
 export const mockClient = {
   from: (table: string) => new MockQuery(table),
   auth: {
-    getSession: async () => ({ data: { session: MOCK_SESSION }, error: null }),
-    getUser: async () => ({ data: { user: MOCK_SESSION.user }, error: null }),
-    signInWithPassword: async () => ({ data: { session: MOCK_SESSION }, error: null }),
-    signUp: async () => ({ data: { session: MOCK_SESSION }, error: null }),
-    signOut: async () => ({ error: null }),
+    getSession: async () => ({ data: { session: MOCK_SESSION }, error: null as { message: string } | null }),
+    getUser: async () => ({ data: { user: MOCK_SESSION.user }, error: null as { message: string } | null }),
+    signInWithPassword: async (_credentials?: unknown) => ({
+      data: { session: MOCK_SESSION },
+      error: null as { message: string } | null,
+    }),
+    signUp: async (_credentials?: unknown) => ({
+      data: { session: MOCK_SESSION },
+      error: null as { message: string } | null,
+    }),
+    signOut: async () => ({ error: null as { message: string } | null }),
     onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }),
   },
 };
