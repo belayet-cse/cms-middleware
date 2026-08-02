@@ -78,20 +78,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "CMS Middleware — Card Onboarding & Maker-Checker" },
+      { title: "CMS Middleware — CBS to CMS Card Management" },
       {
         name: "description",
         content:
-          "Middleware between Core Banking and the Tranzware Card Management System: card onboarding, card number generation, limit setup and full maker-checker control.",
+          "Middleware for customer onboarding and end-to-end card booking between Core Banking and the Tranzware Card Management System, with maker-checker control and full audit trail.",
       },
-      { property: "og:title", content: "CMS Middleware — Card Onboarding & Maker-Checker" },
+      { property: "og:title", content: "CMS Middleware — CBS to CMS Card Management" },
       {
         property: "og:description",
         content:
-          "Single-point customer and card data entry with real-time CBS/CMS synchronisation and dual-control approvals.",
+          "Middleware for customer onboarding and end-to-end card booking between Core Banking and the Tranzware Card Management System, with maker-checker control and full audit trail.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "CMS Middleware — CBS to CMS Card Management" },
+      { name: "twitter:description", content: "Middleware for customer onboarding and end-to-end card booking between Core Banking and the Tranzware Card Management System, with maker-checker control and full audit trail." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7b72f7ee-4067-4c71-aa74-3359b8b056fa/id-preview-962f7291--9a732745-cf28-4cf5-b467-cae83b9c5f60.lovable.app-1785701063305.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7b72f7ee-4067-4c71-aa74-3359b8b056fa/id-preview-962f7291--9a732745-cf28-4cf5-b467-cae83b9c5f60.lovable.app-1785701063305.png" },
     ],
     links: [
       {

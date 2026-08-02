@@ -4,17 +4,17 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "CMS Middleware — CBS to Tranzware Card Management" },
+      { title: "CMS Middleware — CBS to CMS Card Management" },
       {
         name: "description",
         content:
           "Middleware for customer onboarding and end-to-end card booking between Core Banking and the Tranzware Card Management System, with maker-checker control and full audit trail.",
       },
-      { property: "og:title", content: "CMS Middleware — CBS to Tranzware Card Management" },
+      { property: "og:title", content: "CMS Middleware — CBS to CMS Card Management" },
       {
         property: "og:description",
         content:
-          "Single-point data entry, automated card number generation, dual-control limit approval and real-time CBS/CMS synchronisation.",
+          "Middleware for customer onboarding and end-to-end card booking between Core Banking and the Tranzware Card Management System, with maker-checker control and full audit trail.",
       },
     ],
   }),
