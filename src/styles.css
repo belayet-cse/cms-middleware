@@ -206,6 +206,12 @@
   font-variant-numeric: tabular-nums;
 }
 
+@utility brand-rule {
+  height: 3px;
+  width: 100%;
+  background: var(--gradient-brand);
+}
+
 @utility status-neutral {
   border-color: var(--border);
   background-color: var(--muted);
