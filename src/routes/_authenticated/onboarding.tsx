@@ -26,7 +26,7 @@ import {
 import { createCardRequest, searchCbsCif, submitCardRequest, updateCardRequest } from "@/lib/cms.functions";
 
 export const Route = createFileRoute("/_authenticated/onboarding")({
-  validateSearch: (s: Record<string, unknown>) => ({ draft: (s.draft as string) || undefined }),
+  validateSearch: (s: Record<string, unknown>) => ({ draft: (s['draft'] as string) || "" }),
   component: Onboarding,
 });
 
@@ -390,7 +390,7 @@ function Onboarding() {
               </div>
               <div className="space-y-1.5">
                 <Label>Gender</Label>
-                <Select value={form.gender || undefined} onValueChange={(v) => set("gender", v)}>
+                <Select value={form.gender} onValueChange={(v) => set("gender", v)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
@@ -437,7 +437,7 @@ function Onboarding() {
             <div className="grid gap-3 sm:grid-cols-2">
               <div className="space-y-1.5">
                 <Label>Card product *</Label>
-                <Select value={form.product_id || undefined} onValueChange={(v) => set("product_id", v)}>
+                <Select value={form.product_id} onValueChange={(v) => set("product_id", v)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select product" />
                   </SelectTrigger>
@@ -459,7 +459,7 @@ function Onboarding() {
               <div className="space-y-1.5">
                 <Label>Fee profile *</Label>
                 <Select
-                  value={form.fee_profile_id || undefined}
+                  value={form.fee_profile_id}
                   onValueChange={(v) => set("fee_profile_id", v)}
                 >
                   <SelectTrigger>
