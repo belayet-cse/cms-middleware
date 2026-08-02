@@ -55,11 +55,11 @@ export async function createDraftRequest(ctx: Ctx, payload: Record<string, unkno
   const { data, error } = await supabaseAdmin
     .from("card_requests")
     .insert({
-      ...(clean as never),
+      ...clean,
       reference_no: reference,
       status: "draft",
       maker_id: ctx.userId,
-    })
+    } as never)
     .select("id, reference_no")
     .single();
   if (error) throw new Error(error.message);
