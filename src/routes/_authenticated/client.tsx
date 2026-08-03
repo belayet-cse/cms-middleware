@@ -90,7 +90,6 @@ function ClientOnboarding() {
         );
       }
     }
-    base['application_ref_no'] = ref;
     if (ref) base['application_ref_no'] = ref;
     if (cif) base['cms_cif_number'] = cif;
     if (client) base['cms_client_id'] = client;
