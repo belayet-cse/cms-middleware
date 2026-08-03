@@ -187,8 +187,7 @@ export const CLIENT_SECTIONS: SectionDef[] = [
   {
     id: "employment",
     title: "Employment & Business Address",
-    caption:
-      "CMS Employment tab · Business Address (CBS) maps to CMS Addresses — customer registration address",
+    caption: "CMS Employment tab · Business Address (CBS)",
     fields: [
       { name: "same_as_present", label: "Business address same as Present", type: "checkbox" },
       { name: "same_as_permanent", label: "Business address same as Permanent", type: "checkbox" },
