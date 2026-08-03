@@ -24,6 +24,7 @@ import { Route as AuthenticatedFcRouteImport } from './routes/_authenticated/fc'
 import { Route as AuthenticatedIntegrationRouteImport } from './routes/_authenticated/integration'
 import { Route as AuthenticatedLimitsRouteImport } from './routes/_authenticated/limits'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedReportsRouteImport } from './routes/_authenticated/reports'
 import { Route as AuthenticatedServicingRouteImport } from './routes/_authenticated/servicing'
 import { Route as AuthenticatedSetupRouteImport } from './routes/_authenticated/setup'
 import { Route as AuthenticatedStatusRouteImport } from './routes/_authenticated/status'
@@ -107,6 +108,11 @@ const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedReportsRoute = AuthenticatedReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedServicingRoute = AuthenticatedServicingRouteImport.update({
   id: '/servicing',
   path: '/servicing',
@@ -160,6 +166,7 @@ export interface FileRoutesByFullPath {
   '/integration': typeof AuthenticatedIntegrationRoute
   '/limits': typeof AuthenticatedLimitsRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/reports': typeof AuthenticatedReportsRoute
   '/servicing': typeof AuthenticatedServicingRoute
   '/setup': typeof AuthenticatedSetupRoute
   '/status': typeof AuthenticatedStatusRoute
@@ -183,6 +190,7 @@ export interface FileRoutesByTo {
   '/integration': typeof AuthenticatedIntegrationRoute
   '/limits': typeof AuthenticatedLimitsRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/reports': typeof AuthenticatedReportsRoute
   '/servicing': typeof AuthenticatedServicingRoute
   '/setup': typeof AuthenticatedSetupRoute
   '/status': typeof AuthenticatedStatusRoute
@@ -208,6 +216,7 @@ export interface FileRoutesById {
   '/_authenticated/integration': typeof AuthenticatedIntegrationRoute
   '/_authenticated/limits': typeof AuthenticatedLimitsRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/reports': typeof AuthenticatedReportsRoute
   '/_authenticated/servicing': typeof AuthenticatedServicingRoute
   '/_authenticated/setup': typeof AuthenticatedSetupRoute
   '/_authenticated/status': typeof AuthenticatedStatusRoute
@@ -233,6 +242,7 @@ export interface FileRouteTypes {
     | '/integration'
     | '/limits'
     | '/onboarding'
+    | '/reports'
     | '/servicing'
     | '/setup'
     | '/status'
@@ -256,6 +266,7 @@ export interface FileRouteTypes {
     | '/integration'
     | '/limits'
     | '/onboarding'
+    | '/reports'
     | '/servicing'
     | '/setup'
     | '/status'
@@ -280,6 +291,7 @@ export interface FileRouteTypes {
     | '/_authenticated/integration'
     | '/_authenticated/limits'
     | '/_authenticated/onboarding'
+    | '/_authenticated/reports'
     | '/_authenticated/servicing'
     | '/_authenticated/setup'
     | '/_authenticated/status'
@@ -402,6 +414,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/reports': {
+      id: '/_authenticated/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof AuthenticatedReportsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/servicing': {
       id: '/_authenticated/servicing'
       path: '/servicing'
@@ -467,6 +486,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedIntegrationRoute: typeof AuthenticatedIntegrationRoute
   AuthenticatedLimitsRoute: typeof AuthenticatedLimitsRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedReportsRoute: typeof AuthenticatedReportsRoute
   AuthenticatedServicingRoute: typeof AuthenticatedServicingRoute
   AuthenticatedSetupRoute: typeof AuthenticatedSetupRoute
   AuthenticatedStatusRoute: typeof AuthenticatedStatusRoute
@@ -489,6 +509,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedIntegrationRoute: AuthenticatedIntegrationRoute,
   AuthenticatedLimitsRoute: AuthenticatedLimitsRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedReportsRoute: AuthenticatedReportsRoute,
   AuthenticatedServicingRoute: AuthenticatedServicingRoute,
   AuthenticatedSetupRoute: AuthenticatedSetupRoute,
   AuthenticatedStatusRoute: AuthenticatedStatusRoute,
