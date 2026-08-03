@@ -148,26 +148,25 @@ export function AppShell({ children }: { children: ReactNode }) {
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex items-center justify-between gap-4 border-b bg-card px-5 py-3">
-          <div className="min-w-0">
-            <p className="truncate text-sm font-semibold">
-              {auth.profile?.['full_name'] || auth.user?.email}
-            </p>
-            <div className="mt-1 flex flex-wrap items-center gap-1.5">
-              {roleLabels.length ? (
-                roleLabels.map((label) => (
+        <header className="flex flex-wrap items-center justify-between gap-3 border-b bg-card px-5 py-3">
+          <div className="flex min-w-0 flex-1 items-center gap-3">
+            <GlobalSearch />
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="hidden min-w-0 text-right sm:block">
+              <p className="truncate text-[13px] font-semibold">
+                {auth.profile?.full_name || auth.user?.email}
+              </p>
+              <div className="mt-0.5 flex flex-wrap justify-end gap-1">
+                {roleLabels.slice(0, 2).map((label) => (
                   <Badge key={label} variant="secondary" className="text-[10px] uppercase tracking-wide">
                     {label}
                   </Badge>
-                ))
-              ) : (
-                <Badge variant="outline" className="text-[10px] uppercase tracking-wide">
-                  No role assigned
-                </Badge>
-              )}
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-2">
+            <RoleSwitcher />
+            <NotificationsBell />
             <Link to="/requests" className="lg:hidden">
               <Button variant="outline" size="sm">
                 Queue
