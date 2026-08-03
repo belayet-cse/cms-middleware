@@ -16,12 +16,19 @@ import {
   ScrollText,
   Activity,
   LogOut,
+  ShieldAlert,
+  Wrench,
+  Link2,
+  Trash2,
+  Coins,
+  BarChart3,
 } from "lucide-react";
 import { supabase } from "@/lib/mock/db";
 import { useAuth } from "@/hooks/useAuth";
 import { ROLES } from "@/lib/cms-constants";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { GlobalSearch, NotificationsBell, RoleSwitcher } from "@/components/app/TopBarTools";
 import mtbLogo from "@/assets/mtb-logo.png.asset.json";
 
 type NavItem = {
@@ -45,6 +52,16 @@ const NAV: { group: string; items: NavItem[] }[] = [
     ],
   },
   {
+    group: "Card Lifecycle",
+    items: [
+      { to: "/status", label: "Card Status", icon: ShieldAlert },
+      { to: "/servicing", label: "Card Servicing", icon: Wrench },
+      { to: "/supplementary", label: "Supplementary Linkage", icon: Link2 },
+      { to: "/fc", label: "FC Setup", icon: Coins },
+      { to: "/deletions", label: "Card / Contact Delete", icon: Trash2 },
+    ],
+  },
+  {
     group: "Master Data",
     items: [
       { to: "/cards", label: "Card Portfolio", icon: CreditCard },
@@ -56,6 +73,7 @@ const NAV: { group: string; items: NavItem[] }[] = [
     group: "Governance",
     items: [
       { to: "/audit", label: "Audit Trail", icon: ScrollText },
+      { to: "/reports", label: "Reports & Alerts", icon: BarChart3 },
       { to: "/integration", label: "Integration Monitor", icon: Activity },
       { to: "/users", label: "Users & Roles", icon: ShieldCheck, show: (a) => a.isAdmin },
     ],
