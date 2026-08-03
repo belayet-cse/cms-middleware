@@ -172,7 +172,7 @@ export const CLIENT_SECTIONS: SectionDef[] = [
   {
     id: "permanent_address",
     title: "Permanent Address",
-    caption: "CMS Addresses · customer registration · User p1 (Permanent Address 1-3)",
+    caption: "CMS User p1 (Permanent Address 1-3)",
     fields: [
       { name: "permanent_line1", label: "Permanent Address 1", required: true, wide: true },
       { name: "permanent_line2", label: "Permanent Address 2", required: true, wide: true },
@@ -187,7 +187,8 @@ export const CLIENT_SECTIONS: SectionDef[] = [
   {
     id: "employment",
     title: "Employment & Business Address",
-    caption: "CMS Employment tab",
+    caption:
+      "CMS Employment tab · Business Address (CBS) maps to CMS Addresses — customer registration address",
     fields: [
       { name: "same_as_present", label: "Business address same as Present", type: "checkbox" },
       { name: "same_as_permanent", label: "Business address same as Permanent", type: "checkbox" },
@@ -198,11 +199,11 @@ export const CLIENT_SECTIONS: SectionDef[] = [
       { name: "office_phone", label: "Office Phone" },
       { name: "employed_since", label: "Employed Since", type: "date" },
       { name: "previous_employment", label: "Previous Employment", wide: true },
-      { name: "business_line1", label: "Business Address Line 1", required: true, wide: true },
-      { name: "business_line2", label: "Business Address Line 2", wide: true },
-      { name: "business_division", label: "Division", type: "select", options: OPT.division },
-      { name: "business_district", label: "District", type: "select", options: OPT.district },
-      { name: "business_thana", label: "Thana", type: "select", options: OPT.thana },
+      { name: "business_line1", label: "Business Address Line 1", required: true, wide: true, cms: "Addresses — Registration" },
+      { name: "business_line2", label: "Business Address Line 2", wide: true, cms: "Addresses — Registration" },
+      { name: "business_division", label: "Division", type: "select", options: OPT.division, cms: "Addresses — Registration" },
+      { name: "business_district", label: "District", type: "select", options: OPT.district, cms: "Addresses — Registration" },
+      { name: "business_thana", label: "Thana", type: "select", options: OPT.thana, cms: "Addresses — Registration" },
       { name: "occupation", label: "Occupation", type: "select", options: OPT.occupation, required: true },
       { name: "profession", label: "Profession", cms: "User p3" },
       { name: "sector_code", label: "Sector Code", type: "select", options: OPT.sectorCode, required: true, cms: "User p6" },
