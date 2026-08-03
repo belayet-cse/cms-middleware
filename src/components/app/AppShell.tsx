@@ -16,12 +16,19 @@ import {
   ScrollText,
   Activity,
   LogOut,
+  ShieldAlert,
+  Wrench,
+  Link2,
+  Trash2,
+  Coins,
+  BarChart3,
 } from "lucide-react";
 import { supabase } from "@/lib/mock/db";
 import { useAuth } from "@/hooks/useAuth";
 import { ROLES } from "@/lib/cms-constants";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { GlobalSearch, NotificationsBell, RoleSwitcher } from "@/components/app/TopBarTools";
 import mtbLogo from "@/assets/mtb-logo.png.asset.json";
 
 type NavItem = {
@@ -45,6 +52,16 @@ const NAV: { group: string; items: NavItem[] }[] = [
     ],
   },
   {
+    group: "Card Lifecycle",
+    items: [
+      { to: "/status", label: "Card Status", icon: ShieldAlert },
+      { to: "/servicing", label: "Card Servicing", icon: Wrench },
+      { to: "/supplementary", label: "Supplementary Linkage", icon: Link2 },
+      { to: "/fc", label: "FC Setup", icon: Coins },
+      { to: "/deletions", label: "Card / Contact Delete", icon: Trash2 },
+    ],
+  },
+  {
     group: "Master Data",
     items: [
       { to: "/cards", label: "Card Portfolio", icon: CreditCard },
@@ -56,6 +73,7 @@ const NAV: { group: string; items: NavItem[] }[] = [
     group: "Governance",
     items: [
       { to: "/audit", label: "Audit Trail", icon: ScrollText },
+      { to: "/reports", label: "Reports & Alerts", icon: BarChart3 },
       { to: "/integration", label: "Integration Monitor", icon: Activity },
       { to: "/users", label: "Users & Roles", icon: ShieldCheck, show: (a) => a.isAdmin },
     ],
@@ -130,26 +148,25 @@ export function AppShell({ children }: { children: ReactNode }) {
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex items-center justify-between gap-4 border-b bg-card px-5 py-3">
-          <div className="min-w-0">
-            <p className="truncate text-sm font-semibold">
-              {auth.profile?.['full_name'] || auth.user?.email}
-            </p>
-            <div className="mt-1 flex flex-wrap items-center gap-1.5">
-              {roleLabels.length ? (
-                roleLabels.map((label) => (
+        <header className="flex flex-wrap items-center justify-between gap-3 border-b bg-card px-5 py-3">
+          <div className="flex min-w-0 flex-1 items-center gap-3">
+            <GlobalSearch />
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="hidden min-w-0 text-right sm:block">
+              <p className="truncate text-[13px] font-semibold">
+                {auth.profile?.full_name || auth.user?.email}
+              </p>
+              <div className="mt-0.5 flex flex-wrap justify-end gap-1">
+                {roleLabels.slice(0, 2).map((label) => (
                   <Badge key={label} variant="secondary" className="text-[10px] uppercase tracking-wide">
                     {label}
                   </Badge>
-                ))
-              ) : (
-                <Badge variant="outline" className="text-[10px] uppercase tracking-wide">
-                  No role assigned
-                </Badge>
-              )}
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-2">
+            <RoleSwitcher />
+            <NotificationsBell />
             <Link to="/requests" className="lg:hidden">
               <Button variant="outline" size="sm">
                 Queue

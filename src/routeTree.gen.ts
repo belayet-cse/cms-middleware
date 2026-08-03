@@ -19,10 +19,16 @@ import { Route as AuthenticatedClientRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedCustomersRouteImport } from './routes/_authenticated/customers'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedDedupeRouteImport } from './routes/_authenticated/dedupe'
+import { Route as AuthenticatedDeletionsRouteImport } from './routes/_authenticated/deletions'
+import { Route as AuthenticatedFcRouteImport } from './routes/_authenticated/fc'
 import { Route as AuthenticatedIntegrationRouteImport } from './routes/_authenticated/integration'
 import { Route as AuthenticatedLimitsRouteImport } from './routes/_authenticated/limits'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedReportsRouteImport } from './routes/_authenticated/reports'
+import { Route as AuthenticatedServicingRouteImport } from './routes/_authenticated/servicing'
 import { Route as AuthenticatedSetupRouteImport } from './routes/_authenticated/setup'
+import { Route as AuthenticatedStatusRouteImport } from './routes/_authenticated/status'
+import { Route as AuthenticatedSupplementaryRouteImport } from './routes/_authenticated/supplementary'
 import { Route as AuthenticatedUsersRouteImport } from './routes/_authenticated/users'
 import { Route as AuthenticatedRequestsIndexRouteImport } from './routes/_authenticated/requests.index'
 import { Route as AuthenticatedRequestsIdRouteImport } from './routes/_authenticated/requests.$id'
@@ -76,6 +82,16 @@ const AuthenticatedDedupeRoute = AuthenticatedDedupeRouteImport.update({
   path: '/dedupe',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedDeletionsRoute = AuthenticatedDeletionsRouteImport.update({
+  id: '/deletions',
+  path: '/deletions',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedFcRoute = AuthenticatedFcRouteImport.update({
+  id: '/fc',
+  path: '/fc',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedIntegrationRoute =
   AuthenticatedIntegrationRouteImport.update({
     id: '/integration',
@@ -92,11 +108,32 @@ const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedReportsRoute = AuthenticatedReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedServicingRoute = AuthenticatedServicingRouteImport.update({
+  id: '/servicing',
+  path: '/servicing',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedSetupRoute = AuthenticatedSetupRouteImport.update({
   id: '/setup',
   path: '/setup',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedStatusRoute = AuthenticatedStatusRouteImport.update({
+  id: '/status',
+  path: '/status',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSupplementaryRoute =
+  AuthenticatedSupplementaryRouteImport.update({
+    id: '/supplementary',
+    path: '/supplementary',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedUsersRoute = AuthenticatedUsersRouteImport.update({
   id: '/users',
   path: '/users',
@@ -124,10 +161,16 @@ export interface FileRoutesByFullPath {
   '/customers': typeof AuthenticatedCustomersRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/dedupe': typeof AuthenticatedDedupeRoute
+  '/deletions': typeof AuthenticatedDeletionsRoute
+  '/fc': typeof AuthenticatedFcRoute
   '/integration': typeof AuthenticatedIntegrationRoute
   '/limits': typeof AuthenticatedLimitsRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/reports': typeof AuthenticatedReportsRoute
+  '/servicing': typeof AuthenticatedServicingRoute
   '/setup': typeof AuthenticatedSetupRoute
+  '/status': typeof AuthenticatedStatusRoute
+  '/supplementary': typeof AuthenticatedSupplementaryRoute
   '/users': typeof AuthenticatedUsersRoute
   '/requests/$id': typeof AuthenticatedRequestsIdRoute
   '/requests/': typeof AuthenticatedRequestsIndexRoute
@@ -142,10 +185,16 @@ export interface FileRoutesByTo {
   '/customers': typeof AuthenticatedCustomersRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/dedupe': typeof AuthenticatedDedupeRoute
+  '/deletions': typeof AuthenticatedDeletionsRoute
+  '/fc': typeof AuthenticatedFcRoute
   '/integration': typeof AuthenticatedIntegrationRoute
   '/limits': typeof AuthenticatedLimitsRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/reports': typeof AuthenticatedReportsRoute
+  '/servicing': typeof AuthenticatedServicingRoute
   '/setup': typeof AuthenticatedSetupRoute
+  '/status': typeof AuthenticatedStatusRoute
+  '/supplementary': typeof AuthenticatedSupplementaryRoute
   '/users': typeof AuthenticatedUsersRoute
   '/requests/$id': typeof AuthenticatedRequestsIdRoute
   '/requests': typeof AuthenticatedRequestsIndexRoute
@@ -162,10 +211,16 @@ export interface FileRoutesById {
   '/_authenticated/customers': typeof AuthenticatedCustomersRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/dedupe': typeof AuthenticatedDedupeRoute
+  '/_authenticated/deletions': typeof AuthenticatedDeletionsRoute
+  '/_authenticated/fc': typeof AuthenticatedFcRoute
   '/_authenticated/integration': typeof AuthenticatedIntegrationRoute
   '/_authenticated/limits': typeof AuthenticatedLimitsRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/reports': typeof AuthenticatedReportsRoute
+  '/_authenticated/servicing': typeof AuthenticatedServicingRoute
   '/_authenticated/setup': typeof AuthenticatedSetupRoute
+  '/_authenticated/status': typeof AuthenticatedStatusRoute
+  '/_authenticated/supplementary': typeof AuthenticatedSupplementaryRoute
   '/_authenticated/users': typeof AuthenticatedUsersRoute
   '/_authenticated/requests/$id': typeof AuthenticatedRequestsIdRoute
   '/_authenticated/requests/': typeof AuthenticatedRequestsIndexRoute
@@ -182,10 +237,16 @@ export interface FileRouteTypes {
     | '/customers'
     | '/dashboard'
     | '/dedupe'
+    | '/deletions'
+    | '/fc'
     | '/integration'
     | '/limits'
     | '/onboarding'
+    | '/reports'
+    | '/servicing'
     | '/setup'
+    | '/status'
+    | '/supplementary'
     | '/users'
     | '/requests/$id'
     | '/requests/'
@@ -200,10 +261,16 @@ export interface FileRouteTypes {
     | '/customers'
     | '/dashboard'
     | '/dedupe'
+    | '/deletions'
+    | '/fc'
     | '/integration'
     | '/limits'
     | '/onboarding'
+    | '/reports'
+    | '/servicing'
     | '/setup'
+    | '/status'
+    | '/supplementary'
     | '/users'
     | '/requests/$id'
     | '/requests'
@@ -219,10 +286,16 @@ export interface FileRouteTypes {
     | '/_authenticated/customers'
     | '/_authenticated/dashboard'
     | '/_authenticated/dedupe'
+    | '/_authenticated/deletions'
+    | '/_authenticated/fc'
     | '/_authenticated/integration'
     | '/_authenticated/limits'
     | '/_authenticated/onboarding'
+    | '/_authenticated/reports'
+    | '/_authenticated/servicing'
     | '/_authenticated/setup'
+    | '/_authenticated/status'
+    | '/_authenticated/supplementary'
     | '/_authenticated/users'
     | '/_authenticated/requests/$id'
     | '/_authenticated/requests/'
@@ -306,6 +379,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDedupeRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/deletions': {
+      id: '/_authenticated/deletions'
+      path: '/deletions'
+      fullPath: '/deletions'
+      preLoaderRoute: typeof AuthenticatedDeletionsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/fc': {
+      id: '/_authenticated/fc'
+      path: '/fc'
+      fullPath: '/fc'
+      preLoaderRoute: typeof AuthenticatedFcRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/integration': {
       id: '/_authenticated/integration'
       path: '/integration'
@@ -327,11 +414,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/reports': {
+      id: '/_authenticated/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof AuthenticatedReportsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/servicing': {
+      id: '/_authenticated/servicing'
+      path: '/servicing'
+      fullPath: '/servicing'
+      preLoaderRoute: typeof AuthenticatedServicingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/setup': {
       id: '/_authenticated/setup'
       path: '/setup'
       fullPath: '/setup'
       preLoaderRoute: typeof AuthenticatedSetupRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/status': {
+      id: '/_authenticated/status'
+      path: '/status'
+      fullPath: '/status'
+      preLoaderRoute: typeof AuthenticatedStatusRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/supplementary': {
+      id: '/_authenticated/supplementary'
+      path: '/supplementary'
+      fullPath: '/supplementary'
+      preLoaderRoute: typeof AuthenticatedSupplementaryRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/users': {
@@ -366,10 +481,16 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCustomersRoute: typeof AuthenticatedCustomersRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDedupeRoute: typeof AuthenticatedDedupeRoute
+  AuthenticatedDeletionsRoute: typeof AuthenticatedDeletionsRoute
+  AuthenticatedFcRoute: typeof AuthenticatedFcRoute
   AuthenticatedIntegrationRoute: typeof AuthenticatedIntegrationRoute
   AuthenticatedLimitsRoute: typeof AuthenticatedLimitsRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedReportsRoute: typeof AuthenticatedReportsRoute
+  AuthenticatedServicingRoute: typeof AuthenticatedServicingRoute
   AuthenticatedSetupRoute: typeof AuthenticatedSetupRoute
+  AuthenticatedStatusRoute: typeof AuthenticatedStatusRoute
+  AuthenticatedSupplementaryRoute: typeof AuthenticatedSupplementaryRoute
   AuthenticatedUsersRoute: typeof AuthenticatedUsersRoute
   AuthenticatedRequestsIdRoute: typeof AuthenticatedRequestsIdRoute
   AuthenticatedRequestsIndexRoute: typeof AuthenticatedRequestsIndexRoute
@@ -383,10 +504,16 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCustomersRoute: AuthenticatedCustomersRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDedupeRoute: AuthenticatedDedupeRoute,
+  AuthenticatedDeletionsRoute: AuthenticatedDeletionsRoute,
+  AuthenticatedFcRoute: AuthenticatedFcRoute,
   AuthenticatedIntegrationRoute: AuthenticatedIntegrationRoute,
   AuthenticatedLimitsRoute: AuthenticatedLimitsRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedReportsRoute: AuthenticatedReportsRoute,
+  AuthenticatedServicingRoute: AuthenticatedServicingRoute,
   AuthenticatedSetupRoute: AuthenticatedSetupRoute,
+  AuthenticatedStatusRoute: AuthenticatedStatusRoute,
+  AuthenticatedSupplementaryRoute: AuthenticatedSupplementaryRoute,
   AuthenticatedUsersRoute: AuthenticatedUsersRoute,
   AuthenticatedRequestsIdRoute: AuthenticatedRequestsIdRoute,
   AuthenticatedRequestsIndexRoute: AuthenticatedRequestsIndexRoute,
@@ -403,13 +530,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
