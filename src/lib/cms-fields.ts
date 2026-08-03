@@ -155,7 +155,7 @@ export const CLIENT_SECTIONS: SectionDef[] = [
   {
     id: "present_address",
     title: "Present Address",
-    caption: "CMS Addresses · customer residence",
+    caption: "CBS Present Address · CMS Addresses / customer residence",
     fields: [
       { name: "present_line1", label: "Address Line 1", required: true, wide: true },
       { name: "present_line2", label: "Address Line 2", wide: true },
