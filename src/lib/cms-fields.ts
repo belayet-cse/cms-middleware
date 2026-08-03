@@ -155,7 +155,7 @@ export const CLIENT_SECTIONS: SectionDef[] = [
   {
     id: "present_address",
     title: "Present Address",
-    caption: "CMS Addresses · customer residence",
+    caption: "CBS Present Address · CMS Addresses / customer residence",
     fields: [
       { name: "present_line1", label: "Address Line 1", required: true, wide: true },
       { name: "present_line2", label: "Address Line 2", wide: true },
@@ -187,8 +187,7 @@ export const CLIENT_SECTIONS: SectionDef[] = [
   {
     id: "employment",
     title: "Employment & Business Address",
-    caption:
-      "CMS Employment tab · Business Address (CBS) maps to CMS Addresses — customer registration address",
+    caption: "CMS Employment tab · Business Address (CBS)",
     fields: [
       { name: "same_as_present", label: "Business address same as Present", type: "checkbox" },
       { name: "same_as_permanent", label: "Business address same as Permanent", type: "checkbox" },
