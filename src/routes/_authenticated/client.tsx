@@ -93,6 +93,8 @@ function ClientOnboarding() {
       }
     }
     base['application_ref_no'] = ref;
+    base['cms_cif_number'] = cif;
+    base['cms_client_id'] = client;
     base['country'] = "BANGLADESH (50)";
     base['nationality'] = "BANGLADESH";
     base['resident'] = "Resident";
