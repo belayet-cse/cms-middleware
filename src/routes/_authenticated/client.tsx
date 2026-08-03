@@ -21,6 +21,7 @@ import {
   type FieldDef,
 } from "@/lib/cms-fields";
 import { CBS_REGISTRY, CMS_REGISTRY, onboardClient, type OnboardOutcome } from "@/lib/mock/dedupe";
+import { mockClientRecord } from "@/lib/mock/client-mock";
 
 export const Route = createFileRoute("/_authenticated/client")({
   validateSearch: (s: Record<string, unknown>) => ({
@@ -52,11 +53,8 @@ export const Route = createFileRoute("/_authenticated/client")({
 type Form = Record<string, string | boolean>;
 
 function initialForm(): Form {
-  const f: Form = {};
-  for (const section of CLIENT_SECTIONS) {
-    for (const field of section.fields) f[field.name] = field.type === "checkbox" ? false : "";
-  }
-  return f;
+  // Prototype: every field starts pre-filled with mock data.
+  return { ...mockClientRecord(CLIENT_SECTIONS) };
 }
 
 function ClientOnboarding() {
@@ -93,8 +91,9 @@ function ClientOnboarding() {
       }
     }
     base['application_ref_no'] = ref;
-    base['cms_cif_number'] = cif;
-    base['cms_client_id'] = client;
+    if (ref) base['application_ref_no'] = ref;
+    if (cif) base['cms_cif_number'] = cif;
+    if (client) base['cms_client_id'] = client;
     base['country'] = "BANGLADESH (50)";
     base['nationality'] = "BANGLADESH";
     base['resident'] = "Resident";
