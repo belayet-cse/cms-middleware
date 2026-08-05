@@ -30,7 +30,7 @@ import { Route as AuthenticatedSetupRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedStatusRouteImport } from './routes/_authenticated/status'
 import { Route as AuthenticatedSupplementaryRouteImport } from './routes/_authenticated/supplementary'
 import { Route as AuthenticatedUsersRouteImport } from './routes/_authenticated/users'
-import { Route as CardsRouteImport } from './routes/cards.'
+import { Route as CardsSlugRouteImport } from './routes/cards.$slug'
 import { Route as AuthenticatedRequestsIndexRouteImport } from './routes/_authenticated/requests.index'
 import { Route as AuthenticatedRequestsIdRouteImport } from './routes/_authenticated/requests.$id'
 
@@ -140,9 +140,9 @@ const AuthenticatedUsersRoute = AuthenticatedUsersRouteImport.update({
   path: '/users',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const CardsRoute = CardsRouteImport.update({
-  id: '/cards/',
-  path: '/cards/',
+const CardsSlugRoute = CardsSlugRouteImport.update({
+  id: '/cards/$slug',
+  path: '/cards/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedRequestsIndexRoute =
@@ -160,7 +160,6 @@ const AuthenticatedRequestsIdRoute = AuthenticatedRequestsIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/cards/': typeof CardsRoute
   '/audit': typeof AuthenticatedAuditRoute
   '/bulk': typeof AuthenticatedBulkRoute
   '/cards': typeof AuthenticatedCardsRoute
@@ -179,15 +178,16 @@ export interface FileRoutesByFullPath {
   '/status': typeof AuthenticatedStatusRoute
   '/supplementary': typeof AuthenticatedSupplementaryRoute
   '/users': typeof AuthenticatedUsersRoute
+  '/cards/$slug': typeof CardsSlugRoute
   '/requests/$id': typeof AuthenticatedRequestsIdRoute
   '/requests/': typeof AuthenticatedRequestsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/cards': typeof CardsRoute
   '/audit': typeof AuthenticatedAuditRoute
   '/bulk': typeof AuthenticatedBulkRoute
+  '/cards': typeof AuthenticatedCardsRoute
   '/client': typeof AuthenticatedClientRoute
   '/customers': typeof AuthenticatedCustomersRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -203,6 +203,7 @@ export interface FileRoutesByTo {
   '/status': typeof AuthenticatedStatusRoute
   '/supplementary': typeof AuthenticatedSupplementaryRoute
   '/users': typeof AuthenticatedUsersRoute
+  '/cards/$slug': typeof CardsSlugRoute
   '/requests/$id': typeof AuthenticatedRequestsIdRoute
   '/requests': typeof AuthenticatedRequestsIndexRoute
 }
@@ -211,7 +212,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
-  '/cards/': typeof CardsRoute
   '/_authenticated/audit': typeof AuthenticatedAuditRoute
   '/_authenticated/bulk': typeof AuthenticatedBulkRoute
   '/_authenticated/cards': typeof AuthenticatedCardsRoute
@@ -230,6 +230,7 @@ export interface FileRoutesById {
   '/_authenticated/status': typeof AuthenticatedStatusRoute
   '/_authenticated/supplementary': typeof AuthenticatedSupplementaryRoute
   '/_authenticated/users': typeof AuthenticatedUsersRoute
+  '/cards/$slug': typeof CardsSlugRoute
   '/_authenticated/requests/$id': typeof AuthenticatedRequestsIdRoute
   '/_authenticated/requests/': typeof AuthenticatedRequestsIndexRoute
 }
@@ -238,7 +239,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
-    | '/cards/'
     | '/audit'
     | '/bulk'
     | '/cards'
@@ -257,15 +257,16 @@ export interface FileRouteTypes {
     | '/status'
     | '/supplementary'
     | '/users'
+    | '/cards/$slug'
     | '/requests/$id'
     | '/requests/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
-    | '/cards'
     | '/audit'
     | '/bulk'
+    | '/cards'
     | '/client'
     | '/customers'
     | '/dashboard'
@@ -281,6 +282,7 @@ export interface FileRouteTypes {
     | '/status'
     | '/supplementary'
     | '/users'
+    | '/cards/$slug'
     | '/requests/$id'
     | '/requests'
   id:
@@ -288,7 +290,6 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
-    | '/cards/'
     | '/_authenticated/audit'
     | '/_authenticated/bulk'
     | '/_authenticated/cards'
@@ -307,6 +308,7 @@ export interface FileRouteTypes {
     | '/_authenticated/status'
     | '/_authenticated/supplementary'
     | '/_authenticated/users'
+    | '/cards/$slug'
     | '/_authenticated/requests/$id'
     | '/_authenticated/requests/'
   fileRoutesById: FileRoutesById
@@ -315,7 +317,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
-  CardsRoute: typeof CardsRoute
+  CardsSlugRoute: typeof CardsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -467,11 +469,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUsersRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/cards/': {
-      id: '/cards/'
-      path: '/cards'
-      fullPath: '/cards/'
-      preLoaderRoute: typeof CardsRouteImport
+    '/cards/$slug': {
+      id: '/cards/$slug'
+      path: '/cards/$slug'
+      fullPath: '/cards/$slug'
+      preLoaderRoute: typeof CardsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/requests/': {
@@ -544,8 +546,18 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
-  CardsRoute: CardsRoute,
+  CardsSlugRoute: CardsSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
