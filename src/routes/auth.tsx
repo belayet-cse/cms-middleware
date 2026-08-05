@@ -80,7 +80,7 @@ function AuthPage() {
 
   return (
     <div className="grid min-h-screen lg:grid-cols-[1.1fr_1fr]">
-      <div className="relative hidden flex-col justify-between overflow-hidden bg-sidebar px-10 py-12 text-sidebar-foreground lg:flex">
+      <div className="relative hidden flex-col justify-between overflow-hidden brand-header px-10 py-12 text-sidebar-foreground lg:flex">
         <img
           src={mtbSwoosh.url}
           alt=""

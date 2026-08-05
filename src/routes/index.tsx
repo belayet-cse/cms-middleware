@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { MTB_CREDIT_CARDS } from "@/lib/mtb-cards";
 import mtbLogo from "@/assets/mtb-logo.png.asset.json";
 import mtbSwoosh from "@/assets/mtb-swoosh.png.asset.json";
 
@@ -45,7 +46,7 @@ const CAPABILITIES = [
 function Landing() {
   return (
     <div className="min-h-screen bg-background">
-      <header className="bg-sidebar text-sidebar-foreground">
+      <header className="brand-header text-sidebar-foreground">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
             <span className="inline-flex rounded-md bg-white px-2.5 py-1.5">
@@ -89,7 +90,37 @@ function Landing() {
       </header>
 
       <section className="mx-auto max-w-6xl px-6 py-14">
-        <h2 className="text-lg font-semibold">What the middleware handles</h2>
+        <h2 className="text-lg font-semibold">MTB credit card line-up</h2>
+        <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
+          Every product below is bookable through the middleware — product type, fee profile and
+          limit band flow straight into the Card Management System.
+        </p>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {MTB_CREDIT_CARDS.map((c) => (
+            <article key={c.name} className="card-tile overflow-hidden rounded-xl border bg-card">
+              <div className="bg-muted/60 p-5">
+                <img
+                  src={c.image}
+                  alt={`${c.name} card face`}
+                  loading="lazy"
+                  className="mx-auto h-40 w-full rounded-lg object-contain"
+                />
+              </div>
+              <div className="border-t p-5">
+                <div className="flex items-center gap-2">
+                  <span className="field-label text-primary">{c.scheme}</span>
+                  <span className="rounded-full border bg-secondary px-2 py-0.5 text-[11px] font-medium text-secondary-foreground">
+                    {c.tier}
+                  </span>
+                </div>
+                <h3 className="mt-2 text-sm font-semibold">{c.name}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{c.blurb}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <h2 className="mt-14 text-lg font-semibold">What the middleware handles</h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {CAPABILITIES.map((c) => (
             <article key={c.title} className="rounded-lg border bg-card p-5">
