@@ -1,11 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { MTB_CREDIT_CARDS, getMtbCard } from "@/lib/mtb-cards";
+import { MTB_CREDIT_CARDS, getMtbCard, type MtbCard } from "@/lib/mtb-cards";
 import mtbLogo from "@/assets/mtb-logo.png.asset.json";
 import mtbSwoosh from "@/assets/mtb-swoosh.png.asset.json";
 
 export const Route = createFileRoute("/cards/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { card: MtbCard } => {
     const card = getMtbCard(params.slug);
     if (!card) throw notFound();
     return { card };
