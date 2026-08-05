@@ -97,7 +97,12 @@ function Landing() {
         </p>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {MTB_CREDIT_CARDS.map((c) => (
-            <article key={c.name} className="card-tile overflow-hidden rounded-xl border bg-card">
+            <Link
+              key={c.slug}
+              to="/cards/$slug"
+              params={{ slug: c.slug }}
+              className="card-tile block overflow-hidden rounded-xl border bg-card"
+            >
               <div className="bg-muted/60 p-5">
                 <img
                   src={c.image}
@@ -115,8 +120,11 @@ function Landing() {
                 </div>
                 <h3 className="mt-2 text-sm font-semibold">{c.name}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{c.blurb}</p>
+                <p className="mt-3 text-xs font-semibold text-primary">
+                  View features &amp; eligibility →
+                </p>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
 

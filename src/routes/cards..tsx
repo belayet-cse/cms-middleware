@@ -4,7 +4,7 @@ import { MTB_CREDIT_CARDS, getMtbCard } from "@/lib/mtb-cards";
 import mtbLogo from "@/assets/mtb-logo.png.asset.json";
 import mtbSwoosh from "@/assets/mtb-swoosh.png.asset.json";
 
-export const Route = createFileRoute("/cards/$slug")({
+export const Route = createFileRoute("/cards/")({
   loader: ({ params }) => {
     const card = getMtbCard(params.slug);
     if (!card) throw notFound();
