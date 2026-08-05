@@ -1,9 +1,13 @@
 export type MtbCard = {
+  slug: string;
   name: string;
   scheme: "VISA" | "MASTERCARD" | "UNIONPAY";
   tier: string;
   blurb: string;
   image: string;
+  features: string[];
+  eligibility: string[];
+  limitBand: string;
 };
 
 /** MTB credit card line-up, mirroring mutualtrustbank.com/cards/credit-card/. */
