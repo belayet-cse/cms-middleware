@@ -51,7 +51,9 @@ function CardNotFound() {
 }
 
 function CardDetail() {
-  const { card } = Route.useLoaderData();
+  const { slug } = Route.useParams();
+  const card = getMtbCard(slug);
+  if (!card) return <CardNotFound />;
   const others = MTB_CREDIT_CARDS.filter((c) => c.slug !== card.slug).slice(0, 3);
 
   return (
