@@ -215,6 +215,23 @@
   background: var(--gradient-brand);
 }
 
+@utility brand-header {
+  background: var(--gradient-header);
+}
+
+@utility card-tile {
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    border-color 200ms ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in oklab, var(--primary) 45%, transparent);
+    box-shadow: 0 14px 32px -18px color-mix(in oklab, var(--primary) 60%, transparent);
+  }
+}
+
 @utility status-neutral {
   border-color: var(--border);
   background-color: var(--muted);
