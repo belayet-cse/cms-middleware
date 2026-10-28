@@ -1,14 +1,18 @@
-# Welcome to your Lovable project
+# Tranzware Onboarding Hub
+
+We have a CMS-Card Management System of Tranzware. We want to develop a system upon the Tranzware to Onboarding customer and all functionality of CMS with maker checker facility connecting with api service of CMS. BRD attached hereby.
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://cms-middleware.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/9a732745-cf28-4cf5-b467-cae83b9c5f60).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +24,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
